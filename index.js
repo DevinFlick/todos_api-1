@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var lowdb = require('lowdb');
 var uuid = require('uuid');
 var server = express();
-
+var cors = require('cors');
 //import my model
 var Todo = require('./models/todo.js');
 
@@ -17,7 +17,7 @@ db.defaults({todos: []})
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({extended: true}));
-
+server.use(cors());
 server.get('/todos', function(request, response){
   var todos = db.get('todos')
                 .value();
